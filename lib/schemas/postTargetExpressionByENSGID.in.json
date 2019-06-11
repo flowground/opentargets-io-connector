@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "example": "{\"gene\":[\"gene1\", \"gene2\"]}\n",
+            "type": "string"
+        }
+    }
+}

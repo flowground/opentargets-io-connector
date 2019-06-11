@@ -1,0 +1,527 @@
+{
+    "title": "Open Targets Platform",
+    "description": "### The Open Targets Platform REST API\n\nThe Open Targets Platform API ('Application Programming Interface')\nallows programmatic retrieval of our data via a set of\n[REST](https://en.wikipedia.org/wiki/Representational_state_transfer)\nservices.\n\nYou can make calls to the latest version of our API using the base URL\n`https://api.opentargets.io/v3/platform`. Please make sure you use `https`\ninstead of the unencrypted `http` calls, which we do not accept.\n\nContinue reading below or [try query in the interactive interface](https://api.opentargets.io/v3/platform/docs/swagger-ui)\n\nNote that we only serve the latest version of the API. If you are interested in querying an\nold version, please [get in touch](mailto:support@targetvalidation.org) so that\nwe can help.\n\nWe list below the methods available for you to query our data directly from the API. These methods will be\nautomatically generated from our Swagger UI. For every request you create, the interface will display a [curl](https://curl.haxx.se/) command\nthat you can copy and paste directly to a shell to obtain the same results without using an internet browser.\n\nCheck our [API blog posts](https://blog.opentargets.org/tag/api), for tutorials and additional\ninformation on how to access of our data programmatically.\n\n### Available Methods\n\nThe available methods can be grouped in four types:\n\n* __public__ - Methods that serve the core set of our data. These are stable and we fully supported them.\n* __private__ - Methods used by the web app to serve additional data not specific to our platform. These methods\nmay change without notice and should be used with caution.\n* __utils__ - Methods to get statistics and technical data about our API.\n\n### Supported formats\n\nThe four methods above are all available via a `GET` request, and will serve outputs as `JSON`.\nAlternative output formats such `xml`, `csv` and `tab` are also available for some of the methods.\nPlease note that alternative output formats are not supported in this interactive page. The response here will always be in `json` format.\n\nIf you have complex queries with large number of parameters, you should\nuse a `POST` request instead of  `GET`. `POST` methods require a body encoded as `json`.\nWhen querying for a specific disease using the latest version of the API, your call would look like the example below:\n\n```sh\ncurl -X POST -d '{\"disease\":[\"EFO_0000253\"]}' --header 'Content-Type: application/json' https://api.opentargets.io/v3/platform/public/evidence/filter\n```\n### How to interpret a response\n\nEach HTTP response will serve data in headers and body.\nThe headers will give you details about your query, such as how long it took to run, and how much usage you have left (See the 'Fair Usage\nand API keys' section below for more details).\n\nIn the body of the response, you will find the data you have requested for in a `json` format. The\n[jq](https://stedolan.github.io/jq/) program is a useful tool to parse the json response while on the command line.\n\n```sh\ncurl https://api.opentargets.io/v3/platform/public/association/filter\\?target\\=ENSG00000157764 | jq\n```\n\nWe do not analyse the nature of any specific API queries except for the purposes of improving the performance of our API.\nRead more in our [privacy section](https://www.targetvalidation.org/terms_of_use#privacy).\n\nHow can we make the Open Targets Platform API more useful to you? Would you like additional methods to be implemented?\nPlease [get in touch](mailto:support@targetvalidation.org) and send your suggestions.\n\n### More examples\nCheck our [Getting started tutorial](https://blog.opentargets.org/api-getting-started-1) for more\nexamples on how to use the API and for some code snippets, which can be used to construct more complex queries.\n",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/opentargets.io/3.0.2/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "http://api.opentargets.io/v3",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "getApiDocs": {
+            "main": "./lib/actions/getApiDocs.js",
+            "title": "Browse API documentation",
+            "description": "Access api docs as served by Redoc",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getApiDocs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getApiSwaggerUI": {
+            "main": "./lib/actions/getApiSwaggerUI.js",
+            "title": "Browse interactive API documentation",
+            "description": "Interactive API docs using swagger-ui",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getApiSwaggerUI.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAutocomplete": {
+            "main": "./lib/actions/getAutocomplete.js",
+            "title": "Get `autocomplete` objects.",
+            "description": "Search for the closest term to autocomplete in the search box.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAutocomplete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postBestHitSearch": {
+            "main": "./lib/actions/postBestHitSearch.js",
+            "title": "Find the best hit",
+            "description": "Fire the search method for multiple strings\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postBestHitSearch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postDiseaseById": {
+            "main": "./lib/actions/postDiseaseById.js",
+            "title": "Find information about a list of diseases",
+            "description": "Get `disease` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postDiseaseById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDiseaseById": {
+            "main": "./lib/actions/getDiseaseById.js",
+            "title": "Find information about a disease",
+            "description": "Get `disease` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDiseaseById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getECObyID": {
+            "main": "./lib/actions/getECObyID.js",
+            "title": "Get evidence code by ID",
+            "description": "Get `ECO` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getECObyID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postEnrichmentTarget": {
+            "main": "./lib/actions/postEnrichmentTarget.js",
+            "title": "Enrichment analysis",
+            "description": "Returns an enrichment analysis for a list of targets passed in the body\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postEnrichmentTarget.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getQuickSearch": {
+            "main": "./lib/actions/getQuickSearch.js",
+            "title": "Search most relevant results",
+            "description": "Get `search-result` objects. Enables search bar functionality.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getQuickSearch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postRelation": {
+            "main": "./lib/actions/postRelation.js",
+            "title": "Find related entities",
+            "description": "Get `relation` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postRelation.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRelationByEFOID": {
+            "main": "./lib/actions/getRelationByEFOID.js",
+            "title": "Find related entities by disease",
+            "description": "Get `relation` objects starting from diseases.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRelationByEFOID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getRelationByENSGID": {
+            "main": "./lib/actions/getRelationByENSGID.js",
+            "title": "Find related entities by target",
+            "description": "Get `relation` objects starting from diseases.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getRelationByENSGID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postTargetByENSGID": {
+            "main": "./lib/actions/postTargetByENSGID.js",
+            "title": "Find information about a list of targets",
+            "description": "Get `target` objects. Used for the target profile page.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postTargetByENSGID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getTargetExpressionByENSGID": {
+            "main": "./lib/actions/getTargetExpressionByENSGID.js",
+            "title": "Query expression levels",
+            "description": "Get `gene-expression` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getTargetExpressionByENSGID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postTargetExpressionByENSGID": {
+            "main": "./lib/actions/postTargetExpressionByENSGID.js",
+            "title": "Batch query expression levels",
+            "description": "Get `gene-expression` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postTargetExpressionByENSGID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getTargetByENSGID": {
+            "main": "./lib/actions/getTargetByENSGID.js",
+            "title": "Find information about a target",
+            "description": "Get `target` objects.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getTargetByENSGID.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAssociationById": {
+            "main": "./lib/actions/getAssociationById.js",
+            "title": "Get association by id",
+            "description": "Once we integrate all evidence connecting a target to a specific disease, we\n compute an association score by the means of an harmonic sum. This *association score* provides\n an indication of how strong the evidence behind each connection is and can be\n used to rank genes in order of likelihood as drug targets.\n The association ID is constructed by using the Ensembl ID of the gene and the\n EFO ID for the disease (e.g. ENSG00000073756-EFO_0003767).\n The method returns an association object, which contains the data and summary\n on each evidence type included in the calculation of the score, as well as the score itself.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAssociationById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getAssociationFilter": {
+            "main": "./lib/actions/getAssociationFilter.js",
+            "title": "Filter available associations",
+            "description": "More complex queries for associations scores and objects can be done using\nthis method, which allows to sort in different order, restrict to a specific class\nof diseases or targets, as well as filtering results by score and associated pathways.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getAssociationFilter.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postAssociationFilter": {
+            "main": "./lib/actions/postAssociationFilter.js",
+            "title": "Batch query available associations",
+            "description": "Complex queries and filters for association objects can also be submitted using a JSON\nobject and the equivalent POST method.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postAssociationFilter.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getEvidenceById": {
+            "main": "./lib/actions/getEvidenceById.js",
+            "title": "Get evidence by ID",
+            "description": "We call **evidence** a unit of data that support a connection between a target and a disease.\nThe Open Targets Platform integrates multiple types of evidence including genetic associations,\nsomatic mutations, RNA expression and target-disease associations mined from the literature.\nThis method allows you to retrieve a single evidence item or a list of pieces of evidence by using their\ntargetvalidation.org ID.\n\nEvidence IDs are unique within each data release (e.g. `8ed3d7568a8c6cac9c95cfb869bac762` for release 1.2).\nYou can obtain a list of evidence and their IDs from other API calls such as [/public/evidence/filter](#!/public/get_public_evidence_filter).\n\n**Please note** that a specific evidence ID may change between data releases. We can not guarantee that a specific evidence ID will refer to the same piece of evidence connecting a target and its diseases.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getEvidenceById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postEvidenceById": {
+            "main": "./lib/actions/postEvidenceById.js",
+            "title": "Get evidence for a list of IDs",
+            "description": "This is the POST version of [/public/evidence](#!/public/get_public_evidence).\nIt allows to query for a list of evidence strings encoded in a `json` object to be passed in the body.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postEvidenceById.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getEvidenceFilter": {
+            "main": "./lib/actions/getEvidenceFilter.js",
+            "title": "Filter available evidence",
+            "description": "The filter method allows to retrieve the specific data that supports a connection between targets and diseases.\nFilters can be used to restrict the results by source and type of data,\nor limit results to targets which are part of a particular pathway.\nMinimum and maximum scores can be specified as well as the type of evidence linking target and disease.\n**Note** that multiple genes and diseases can be specified in the same request.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getEvidenceFilter.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "postEvidenceFilter": {
+            "main": "./lib/actions/postEvidenceFilter.js",
+            "title": "Batch filter available evidence",
+            "description": "POST version of [/public/evidence/filter](#!/public/get_public_evidence_filter).\nFilters can be specified as part of a `json` object in the body, simplifying the submission of queries.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/postEvidenceFilter.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSearch": {
+            "main": "./lib/actions/getSearch.js",
+            "title": "Search for a disease or a target",
+            "description": "This method allows you to look for gene or diseases of interest using a free text search,\nreplicating the functionality of the search box on our homepage. It should be used to identify\nthe best match for a disease or target of interest, rather than gathering a specific set of evidence.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSearch.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDataMetrics": {
+            "main": "./lib/actions/getDataMetrics.js",
+            "title": "Get metrics about the current data release",
+            "description": "Returns the metrics about associations and evidences, divided by datasource, genes and so on.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDataMetrics.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getPing": {
+            "main": "./lib/actions/getPing.js",
+            "title": "Ping service",
+            "description": "Check if the API is up\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getPing.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getDataStats": {
+            "main": "./lib/actions/getDataStats.js",
+            "title": "Get statistics about the current data release",
+            "description": "Returns the number of associations and evidences, divided by datasource.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getDataStats.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getVersion": {
+            "main": "./lib/actions/getVersion.js",
+            "title": "Get API version",
+            "description": "Returns current API version.\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getVersion.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "getSwagger": {
+            "main": "./lib/actions/getSwagger.js",
+            "title": "Get OpenAPI schema",
+            "description": "Get swagger.yaml specs for the API",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/getSwagger.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

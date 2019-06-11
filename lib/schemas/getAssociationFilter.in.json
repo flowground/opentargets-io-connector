@@ -1,0 +1,91 @@
+{
+    "type": "object",
+    "properties": {
+        "target": {
+            "required": false,
+            "type": "string"
+        },
+        "disease": {
+            "required": false,
+            "type": "string"
+        },
+        "therapeutic_area": {
+            "required": false,
+            "type": "string"
+        },
+        "datasource": {
+            "required": false,
+            "type": "string"
+        },
+        "datatype": {
+            "required": false,
+            "type": "string"
+        },
+        "pathway": {
+            "required": false,
+            "type": "string"
+        },
+        "target_class": {
+            "required": false,
+            "type": "string"
+        },
+        "uniprotkw": {
+            "required": false,
+            "type": "string"
+        },
+        "direct": {
+            "required": false,
+            "type": "boolean"
+        },
+        "datastructure": {
+            "required": false,
+            "type": "string"
+        },
+        "fields": {
+            "required": false,
+            "type": "string"
+        },
+        "facets": {
+            "required": false,
+            "type": "boolean",
+            "default": false
+        },
+        "scorevalue_min": {
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "default": 0
+        },
+        "scorevalue_max": {
+            "required": false,
+            "type": "number",
+            "format": "float"
+        },
+        "scorevalue_types": {
+            "required": false,
+            "type": "string"
+        },
+        "size": {
+            "required": false,
+            "type": "number",
+            "format": "integer"
+        },
+        "from": {
+            "required": false,
+            "type": "number",
+            "format": "integer"
+        },
+        "format": {
+            "required": false,
+            "type": "string"
+        },
+        "sort": {
+            "required": false,
+            "type": "string"
+        },
+        "search": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

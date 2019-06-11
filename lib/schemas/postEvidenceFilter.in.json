@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "example": "{\"target\":[\"ENSG00000094755\", \"ENSG00000167207\"], \"disease\":[\"EFO_0003767\"]}\n",
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "disease": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "ECO_ID": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

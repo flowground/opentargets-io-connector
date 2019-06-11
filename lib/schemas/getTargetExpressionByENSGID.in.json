@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "gene": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "example": "{\"target\" : [\"ENSG00000001\", \"ENSG00000002\"],\n \"pvalue\" : 0.001,\n \"size\" : 20}\n",
+            "type": "string"
+        }
+    }
+}

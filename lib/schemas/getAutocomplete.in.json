@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "properties": {
+        "q": {
+            "required": true,
+            "type": "string"
+        },
+        "size": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

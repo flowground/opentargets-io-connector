@@ -1,0 +1,66 @@
+{
+    "type": "object",
+    "properties": {
+        "target": {
+            "required": false,
+            "type": "string"
+        },
+        "disease": {
+            "required": false,
+            "type": "string"
+        },
+        "datatype": {
+            "required": false,
+            "type": "string"
+        },
+        "pathway": {
+            "required": false,
+            "type": "string"
+        },
+        "uniprotkw": {
+            "required": false,
+            "type": "string"
+        },
+        "datastructure": {
+            "required": false,
+            "type": "string"
+        },
+        "fields": {
+            "required": false,
+            "type": "string"
+        },
+        "scorevalue_min": {
+            "required": false,
+            "type": "number",
+            "format": "float",
+            "default": 0
+        },
+        "scorevalue_max": {
+            "required": false,
+            "type": "number",
+            "format": "float"
+        },
+        "sort": {
+            "required": false,
+            "type": "string"
+        },
+        "size": {
+            "required": false,
+            "type": "number",
+            "format": "integer"
+        },
+        "from": {
+            "required": false,
+            "type": "number",
+            "format": "integer"
+        },
+        "format": {
+            "required": false,
+            "type": "string"
+        },
+        "data_source": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

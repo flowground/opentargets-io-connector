@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "target": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

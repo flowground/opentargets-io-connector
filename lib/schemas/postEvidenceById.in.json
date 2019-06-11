@@ -1,0 +1,9 @@
+{
+    "type": "object",
+    "properties": {
+        "requestBody": {
+            "example": "{\"id\":[\"id1\", \"id2\"]}\n",
+            "type": "string"
+        }
+    }
+}
